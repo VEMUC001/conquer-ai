@@ -1,6 +1,6 @@
-import 'package:conquer_ai/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'theme/theme.dart';
 
 // import 'package:appwrite/appwrite.dart';
 
