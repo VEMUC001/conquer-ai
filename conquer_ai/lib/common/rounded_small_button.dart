@@ -25,13 +25,13 @@ class RoundedSmallButton extends StatelessWidget {
           label,
           style: TextStyle(
             color: textColor,
-            fontSize: 16,
+            fontSize: 14,
           ),
         ),
         backgroundColor: backgroundColor,
         labelPadding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 5,
+          horizontal: 16,
+          vertical: 4,
         ),
       ),
     );

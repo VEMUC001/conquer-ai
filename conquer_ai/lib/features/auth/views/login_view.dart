@@ -1,12 +1,19 @@
 import 'package:conquer_ai/common/loading_page.dart';
 import 'package:conquer_ai/common/rounded_small_button.dart';
+import 'package:conquer_ai/features/auth/views/signup_view.dart';
 import 'package:conquer_ai/features/auth/widgets/auth_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:conquer_ai/constants/constants.dart';
 import 'package:conquer_ai/theme/theme.dart';
+import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
+
+import '../widgets/onboarding_image_text_page.dart';
 
 class LoginView extends StatefulWidget {
+  static route() => MaterialPageRoute(
+        builder: (context) => const LoginView(),
+      );
   const LoginView({super.key});
 
   @override
@@ -16,6 +23,16 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  late int selectedPage;
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    selectedPage = 0;
+    _pageController = PageController(initialPage: selectedPage);
+
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -39,66 +56,133 @@ class _LoginViewState extends State<LoginView> {
 
   Widget buildView(BuildContext context) {
     final appbar = UIConstants.appBar();
-    final isLoading = false;
+    const isLoading = false;
 
     return Scaffold(
-      appBar: appbar,
+      // appBar: appbar,
       body: isLoading
           ? const Loader()
           : Center(
-              child: SingleChildScrollView(
+              child: Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: [
                       // textfield 1
-                      AuthField(
-                        controller: emailController,
-                        hintText: 'Email',
-                      ),
-                      const SizedBox(height: 25),
-                      AuthField(
-                        controller: passwordController,
-                        hintText: 'Password',
-                      ),
-                      const SizedBox(height: 40),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: RoundedSmallButton(
-                          onTap: onLogin,
-                          label: 'Done',
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                      RichText(
-                        text: TextSpan(
-                          text: "Don't have an account?",
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: ' Sign up',
-                              style: const TextStyle(
-                                color: Pallete.blueColor,
-                                fontSize: 16,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   SignUpView.route(),
-                                  // );
-                                },
-                            ),
-                          ],
-                        ),
-                      ),
+                      buildViewPager(),
+                      buildPageIndicator(),
+                      const SizedBox(height: 16),
+                      buildEmailTextField(),
+                      const SizedBox(height: 16),
+                      buildPasswordTextField(),
+                      const SizedBox(height: 16),
+                      buildLoginButton(),
+                      const SizedBox(height: 16),
+                      buildRegistrationTextField(),
                     ],
                   ),
                 ),
               ),
             ),
+    );
+  }
+
+  RichText buildRegistrationTextField() {
+    return RichText(
+      text: TextSpan(
+        text: "Don't have an account?",
+        style: const TextStyle(
+          fontSize: 14,
+        ),
+        children: [
+          TextSpan(
+            text: ' Sign up',
+            style: const TextStyle(
+              color: Pallete.blueColor,
+              fontSize: 14,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.push(
+                  context,
+                  SignUpView.route(),
+                );
+              },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Align buildLoginButton() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: RoundedSmallButton(
+        onTap: onLogin,
+        label: 'Done',
+      ),
+    );
+  }
+
+  Widget buildEmailTextField() {
+    return AuthField(
+      keyboardType: TextInputType.emailAddress,
+      controller: emailController,
+      hintText: 'Email',
+    );
+  }
+
+  Widget buildPasswordTextField() {
+    return AuthField(
+      obscureText: true,
+      controller: passwordController,
+      hintText: 'Password',
+    );
+  }
+
+  Widget buildViewPager() {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.6,
+      width: MediaQuery.of(context).size.width,
+      child: PageView(
+        controller: _pageController,
+        pageSnapping: true,
+        onPageChanged: (page) {
+          setState(
+            () {
+              selectedPage = page;
+            },
+          );
+        },
+        children: const [
+          OnboardingPage(
+            description: 'Hello there, welcome to Conquer AI.',
+            imgFile: AssetsConstants.conquerLottiePath,
+          ),
+          OnboardingPage(
+            description: 'This is the second page. Explore more.',
+            imgFile: AssetsConstants.winnerLottiePath,
+          ),
+          OnboardingPage(
+            description: 'Endless possibilities. Let\'s get started.',
+            imgFile: AssetsConstants.trophyLottiePath,
+          ),
+        ],
+      ),
+    );
+  }
+
+  buildPageIndicator() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: PageViewDotIndicator(
+        currentItem: selectedPage,
+        count: 3,
+        size: const Size(8, 8),
+        unselectedColor: Colors.grey,
+        selectedColor: Colors.white,
+        duration: const Duration(milliseconds: 200),
+      ),
     );
   }
 }

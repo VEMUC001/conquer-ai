@@ -6,9 +6,13 @@ class UIConstants {
     return AppBar(
       title: const Text(
         "Conquer",
-        style: TextStyle(color: Pallete.whiteColor, fontSize: 30.0),
+        style: TextStyle(color: Pallete.whiteColor, fontSize: 22.0),
       ),
       centerTitle: true,
     );
+  }
+
+  static AppBar appBarNoTitle() {
+    return AppBar();
   }
 }
