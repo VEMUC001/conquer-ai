@@ -1,3 +1,4 @@
+import 'package:conquer_ai/features/auth/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'theme/theme.dart';
@@ -21,11 +22,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Conquer AI',
       theme: AppTheme.theme,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Conquer AI'),
-        ),
-      ),
+      home: const LoginView(),
     );
   }
 }
