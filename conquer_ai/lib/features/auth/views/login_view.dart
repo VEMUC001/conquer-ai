@@ -1,26 +1,28 @@
 import 'package:conquer_ai/common/loading_page.dart';
 import 'package:conquer_ai/common/rounded_small_button.dart';
+import 'package:conquer_ai/features/auth/controller/auth_controller.dart';
 import 'package:conquer_ai/features/auth/views/signup_view.dart';
 import 'package:conquer_ai/features/auth/widgets/auth_text_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:conquer_ai/constants/constants.dart';
 import 'package:conquer_ai/theme/theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
 
 import '../widgets/onboarding_image_text_page.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends ConsumerStatefulWidget {
   static route() => MaterialPageRoute(
         builder: (context) => const LoginView(),
       );
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends ConsumerState<LoginView> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   late int selectedPage;
@@ -42,11 +44,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void onLogin() {
-    // ref.read(authControllerProvider.notifier).login(
-    //       email: emailController.text,
-    //       password: passwordController.text,
-    //       context: context,
-    //     );
+    ref.read(authControllerProvider.notifier).login(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
   }
 
   @override
@@ -55,32 +57,30 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget buildView(BuildContext context) {
-    final appbar = UIConstants.appBar();
-    const isLoading = false;
+    // final appbar = UIConstants.appBar();
+    final isLoading = ref.watch(authControllerProvider);
 
     return Scaffold(
       // appBar: appbar,
       body: isLoading
           ? const Loader()
-          : Center(
-              child: Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      // textfield 1
-                      buildViewPager(),
-                      buildPageIndicator(),
-                      const SizedBox(height: 16),
-                      buildEmailTextField(),
-                      const SizedBox(height: 16),
-                      buildPasswordTextField(),
-                      const SizedBox(height: 16),
-                      buildLoginButton(),
-                      const SizedBox(height: 16),
-                      buildRegistrationTextField(),
-                    ],
-                  ),
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    // textfield 1
+                    buildViewPager(),
+                    buildPageIndicator(),
+                    const SizedBox(height: 32),
+                    buildEmailTextField(),
+                    const SizedBox(height: 16),
+                    buildPasswordTextField(),
+                    const SizedBox(height: 16),
+                    buildLoginButton(),
+                    const SizedBox(height: 16),
+                    buildRegistrationTextField(),
+                  ],
                 ),
               ),
             ),
@@ -142,7 +142,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget buildViewPager() {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.5,
       width: MediaQuery.of(context).size.width,
       child: PageView(
         controller: _pageController,

@@ -1,5 +1,6 @@
 import 'package:conquer_ai/common/loading_page.dart';
 import 'package:conquer_ai/common/rounded_small_button.dart';
+import 'package:conquer_ai/features/auth/controller/auth_controller.dart';
 import 'package:conquer_ai/features/auth/views/login_view.dart';
 import 'package:conquer_ai/features/auth/widgets/auth_text_field.dart';
 import 'package:conquer_ai/theme/theme.dart';
@@ -35,17 +36,16 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
   }
 
   void onSignUp() {
-    // ref.read(authControllerProvider.notifier).signUp(
-    //       email: emailController.text,
-    //       password: passwordController.text,
-    //       context: context,
-    //     );
+    ref.read(authControllerProvider.notifier).signUp(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-    // final isLoading = ref.watch(authControllerProvider);
-    final isLoading = false;
+    final isLoading = ref.watch(authControllerProvider);
 
     return Scaffold(
       appBar: appbar,
