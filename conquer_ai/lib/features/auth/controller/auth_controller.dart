@@ -34,7 +34,7 @@ class AuthController extends StateNotifier<bool> {
       (failure) => showSnackBar(context, failure.message),
       (session) {
         //TOFIX: this needs to navigate to the home screen
-        Navigator.push(context, CreateGoalView.route());
+        Navigator.pushReplacement(context, CreateGoalView.route());
       },
     );
   }
@@ -51,7 +51,7 @@ class AuthController extends StateNotifier<bool> {
       (failure) => showSnackBar(context, failure.message),
       (account) {
         //TOFIX: this needs to navigate to the home screen and save the account to the userModel
-        Navigator.push(context, LoginView.route());
+        Navigator.pushReplacement(context, LoginView.route());
       },
     );
   }

@@ -15,4 +15,15 @@ class UIConstants {
   static AppBar appBarNoTitle() {
     return AppBar();
   }
+
+  static TextStyle homeBodyTextStyle() => const TextStyle(
+        color: Pallete.backgroundColor,
+        fontSize: 14.0,
+      );
+
+  static TextStyle homeTitleTextStyle() => const TextStyle(
+        color: Pallete.darkGreyColor,
+        fontWeight: FontWeight.w500,
+        fontSize: 16.0,
+      );
 }
