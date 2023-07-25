@@ -96,7 +96,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
         ),
         children: [
           TextSpan(
-            text: ' Sign up',
+            text: 'Sign up',
             style: const TextStyle(
               color: Pallete.blueColor,
               fontSize: 14,

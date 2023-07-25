@@ -17,7 +17,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Conquer AI',
       theme: AppTheme.theme,
-      home: const HomeView(),
+      home: const LoginView(),
     );
   }
 }

@@ -12,6 +12,25 @@ class UIConstants {
     );
   }
 
+  static AppBar appBarWithSettings() {
+    return AppBar(
+      title: const Text(
+        "Conquer",
+        style: TextStyle(color: Pallete.whiteColor, fontSize: 22.0),
+      ),
+      centerTitle: true,
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.settings,
+            color: Pallete.greyColor,
+          ),
+        ),
+      ],
+    );
+  }
+
   static AppBar appBarNoTitle() {
     return AppBar();
   }

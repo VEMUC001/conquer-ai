@@ -2,6 +2,7 @@ import 'package:conquer_ai/constants/constants.dart';
 import 'package:conquer_ai/core/utils.dart';
 import 'package:conquer_ai/features/goals/views/create_goal.dart';
 import 'package:conquer_ai/features/home/widget/goal_card.dart';
+import 'package:conquer_ai/features/profile/edit_profile.dart';
 import 'package:conquer_ai/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UIConstants.appBar(),
+      appBar: UIConstants.appBarWithSettings(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -166,11 +167,19 @@ class _HomeViewState extends ConsumerState<HomeView> {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.settings,
-              color: Pallete.whiteColor,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                EditUserProfileScreen.route(),
+              );
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.edit,
+                color: Pallete.whiteColor,
+              ),
             ),
           )
         ],

@@ -1,7 +1,7 @@
 import 'package:conquer_ai/apis/auth_api.dart';
 import 'package:conquer_ai/features/auth/views/login_view.dart';
 import 'package:conquer_ai/features/auth/views/signup_view.dart';
-import 'package:conquer_ai/features/goals/views/create_goal.dart';
+import 'package:conquer_ai/features/home/view%20/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:appwrite/models.dart' as model;
@@ -34,7 +34,7 @@ class AuthController extends StateNotifier<bool> {
       (failure) => showSnackBar(context, failure.message),
       (session) {
         //TOFIX: this needs to navigate to the home screen
-        Navigator.pushReplacement(context, CreateGoalView.route());
+        Navigator.pushReplacement(context, HomeView.route());
       },
     );
   }
