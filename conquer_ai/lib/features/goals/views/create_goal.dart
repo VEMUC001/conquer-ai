@@ -170,8 +170,8 @@ class _CreateGoalViewState extends ConsumerState<CreateGoalView> {
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Row(
-            children: const [
+          child: const Row(
+            children: [
               Text("Adjust Tasks"),
               SizedBox(width: 2),
               Icon(Icons.arrow_forward, color: Colors.white),

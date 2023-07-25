@@ -1,4 +1,3 @@
-import 'package:conquer_ai/core/type_defs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'
     show StateNotifier, StateNotifierProvider;

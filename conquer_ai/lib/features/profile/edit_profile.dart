@@ -187,9 +187,9 @@ class _EditUserProfileScreenState extends ConsumerState<EditUserProfileScreen> {
   }
 
   Widget buildPrivacyAndLegalSection() {
-    return Card(
+    return const Card(
         child: Column(
-      children: const [
+      children: [
         ListTile(
           title: Text("Privacy Policy"),
           trailing: Icon(Icons.arrow_forward_ios),
