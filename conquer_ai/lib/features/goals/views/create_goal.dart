@@ -1,4 +1,5 @@
 import 'package:conquer_ai/constants/constants.dart';
+import 'package:conquer_ai/features/ai/AiController.dart';
 import 'package:conquer_ai/features/goals/widgets/goal_text_field.dart';
 import 'package:conquer_ai/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +99,12 @@ class _CreateGoalViewState extends ConsumerState<CreateGoalView> {
     return Align(
       alignment: FractionalOffset.bottomCenter,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          ref.read(aiControllerProvider.notifier).getAIResponse(
+                prompt:
+                    "Please generate the steps to achieve the following goal: I want to ${goalNameController.text}",
+              );
+        },
         style: ElevatedButton.styleFrom(
           minimumSize: const Size.fromHeight(40), // NEW
           backgroundColor: Pallete.creamColor,
